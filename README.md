@@ -1,6 +1,8 @@
-<img align="center" src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fgiphy.com%2Fexplore%2Fprogrammer&psig=AOvVaw3upwxpbZY7StQ-rIgNKsAz&ust=1704841809027000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCPDDo-31zoMDFQAAAAAdAAAAABAQ](https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExODMzMWhjaGkyY3BrZzFtdWxlNjNzc2J1dmdkNTNjZDhqZHo4N3IwMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/qgQUggAC3Pfv687qPC/giphy.gif)"/>
+[![MasterHead](https://1.bp.blogspot.com/-7A4WynwLsM...)](https://rishavchanda.io)
+
 <h1 align="center">Hi 👋, I'm Belal Hesham</h1>
 <h3 align="center">A passionate frontend developer from Egypt</h3>
+<img align="right" alt="Coding" src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fgiphy.com%2Fexplore%2Fprogrammer&psig=AOvVaw3upwxpbZY7StQ-rIgNKsAz&ust=1704841809027000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCPDDo-31zoMDFQAAAAAdAAAAABAQ](https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExODMzMWhjaGkyY3BrZzFtdWxlNjNzc2J1dmdkNTNjZDhqZHo4N3IwMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/qgQUggAC3Pfv687qPC/giphy.gif)"/>
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=belalaboseada&label=Profile%20views&color=0e75b6&style=flat" alt="belalaboseada" /> </p>
 
@@ -27,8 +29,3 @@
 <h3 align="left">Support:</h3>
 <p><a href="https://www.buymeacoffee.com/Belal Hesham"> <img align="left" src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="50" width="210" alt="Belal Hesham" /></a></p><br><br>
 
-<p><img align="left" src="https://github-readme-stats.vercel.app/api/top-langs?username=belalaboseada&show_icons=true&locale=en&layout=compact" alt="belalaboseada" /></p>
-
-<p>&nbsp;<img align="center" src="https://github-readme-stats.vercel.app/api?username=belalaboseada&show_icons=true&locale=en" alt="belalaboseada" /></p>
-
-<p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=belalaboseada&" alt="belalaboseada" /></p>
