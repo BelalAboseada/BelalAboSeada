@@ -14,7 +14,7 @@
 
 - 📫 How to reach me **belalaboseada@gmail.com**
 
-- 📄 Know about my experiences [https://drive.google.com/file/d/1nA7UsMy4oNp2IbepNRGW7QOPDgM9nsa4/view](https://drive.google.com/file/d/1nA7UsMy4oNp2IbepNRGW7QOPDgM9nsa4/view)
+- 📄 Know about my experiences [My Cv](https://drive.google.com/file/d/1nA7UsMy4oNp2IbepNRGW7QOPDgM9nsa4/view)
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">
