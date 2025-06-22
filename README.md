@@ -12,7 +12,7 @@
 
 - 🌱 I’m currently learning **Mearn stack**
 
-- 👨‍💻 All of my projects are available at [My Portfolio](https://belal-portfolio.vercel.app/)
+- 👨‍💻 All of my projects are available at [My Portfolio](https://belal-portfolio-phi.vercel.app/)
 
 - 📫 How to reach me **belalaboseada@gmail.com**
 
