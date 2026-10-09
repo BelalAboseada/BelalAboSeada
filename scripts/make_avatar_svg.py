@@ -74,8 +74,7 @@ def render():
     out.append(f'<clipPath id="disc"><circle cx="{cx}" cy="{cy}" r="{r - 2}"/></clipPath>')
     out.append(f'<g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="{FADE_AT}s" '
                f'dur="{FADE_S}s" fill="freeze"/>'
-               f'<image href="{data_uri(im)}" x="{X0}" y="{Y0}" width="{D}" height="{D}" clip-path="url(#disc)"/>'
-               f'<circle cx="{cx}" cy="{cy}" r="{r - 2}" fill="none" stroke="{FLAX[500]}" stroke-width="4"/></g>')
+               f'<image href="{data_uri(im)}" x="{X0}" y="{Y0}" width="{D}" height="{D}" clip-path="url(#disc)"/></g>')
     sy = H - 18
     out.append(f'<line x1="0" y1="{H - STATUS_H}" x2="{W}" y2="{H - STATUS_H}" stroke="{FLAX[700]}" stroke-opacity="0.7"/>')
     out.append(f'<text x="28" y="{sy}" font-size="22" fill="{MUTED}">avatar.png · '
