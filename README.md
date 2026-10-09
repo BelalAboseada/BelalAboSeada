@@ -4,8 +4,8 @@
 
 <a href="https://belalaboseada.vercel.app/">
 <picture>
-  <source media="(max-width: 767px)" srcset="./hero-mobile.svg?v=1883525e">
-  <img src="./hero.svg?v=b0260838" width="860" alt="Belal Aboseada: Software Engineer and Tech Content Creator" />
+  <source media="(max-width: 767px)" srcset="./hero-mobile.svg?v=5cbef41a">
+  <img src="./hero.svg?v=f88933fe" width="860" alt="Belal Aboseada: Software Engineer and Tech Content Creator" />
 </picture>
 </a>
 

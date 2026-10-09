@@ -15,7 +15,8 @@ from theme import FLAX, grain, svg_open
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, "..")
-AVATAR = os.path.join(ROOT, "assets", "avatar.png")
+# the open bust (transparent around the figure), not the round avatar
+BUST = os.path.join(ROOT, "assets", "avatar-bust.png")
 LINES = ["BELAL", "ABOSEADA"]
 SUB = "Software Engineer × Tech Content Creator"
 INK = "#45463A"
@@ -29,9 +30,13 @@ def width(text, size):
     return sum(hmtx[cmap[ord(c)]][0] for c in text) * size / upm
 
 
-def avatar_uri(px):
+_bust = Image.open(BUST).convert("RGBA")
+BUST_RATIO = _bust.width / _bust.height
+
+
+def bust_uri(h):
     buf = io.BytesIO()
-    Image.open(AVATAR).convert("RGBA").resize((px, px), Image.LANCZOS).save(buf, "WEBP", quality=90, method=6)
+    _bust.resize((round(h * BUST_RATIO), h), Image.LANCZOS).save(buf, "WEBP", quality=92, method=6)
     return "data:image/webp;base64," + base64.b64encode(buf.getvalue()).decode()
 
 
@@ -47,7 +52,7 @@ def render(w, h, size, x0, line_y, star, sub_xy, sub_fs, av):
     css = ("@keyframes up{from{transform:translateY(" + str(int(size * 1.1)) + "px)}to{transform:none}}"
            ".ln{animation:up 1s cubic-bezier(.2,.8,.2,1) both}"
            "@keyframes pop{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:none}}"
-           ".av{transform-box:fill-box;transform-origin:center;animation:pop 1s .5s cubic-bezier(.2,.8,.2,1) both}"
+           ".av{transform-box:fill-box;transform-origin:center bottom;animation:pop 1s .5s cubic-bezier(.2,.8,.2,1) both}"
            "@keyframes fade{from{opacity:0}to{opacity:1}}.fd{animation:fade 1s .9s both}")
     out = [svg_open(w, h, fonts=("Cabinet", "Switzer")), f"<style>{css}</style>",
            f"<defs>{grain('hg', 0.10)}</defs>",
@@ -60,36 +65,37 @@ def render(w, h, size, x0, line_y, star, sub_xy, sub_fs, av):
     out.append(asterisk(*star, INK))
     out.append(f'<text class="fd" x="{sub_xy[0]}" y="{sub_xy[1]}" font-family="{BODY}" font-size="{sub_fs}" '
                f'fill="{FLAX[500]}">{SUB}</text>')
-    ax, ay, ad = av
-    out.append(f'<image class="av" href="{avatar_uri(ad)}" x="{ax}" y="{ay}" width="{ad}" height="{ad}"/>')
+    ax, bh = av                      # bust sits on the bottom edge, flat cut flush with it
+    bw = round(bh * BUST_RATIO)
+    out.append(f'<image class="av" href="{bust_uri(bh)}" x="{ax}" y="{h - bh}" width="{bw}" height="{bh}"/>')
     out.append("</svg>")
     return "".join(out)
 
 
 if __name__ == "__main__":
-    # desktop: name left, avatar right
+    # desktop: name left, bust rising from the bottom-right edge
     W, H, x0 = 1720, 620, 70
-    av_d = 500
-    av_x = W - 70 - av_d
+    bh = 560
+    bx = W - 60 - round(bh * BUST_RATIO)
     size = 210
-    while width("ABOSEADA", size) > av_x - x0 - 70:   # keep a clear gap before the avatar
+    while width("ABOSEADA", size) > bx - x0 - 60:      # clear gap before the bust
         size -= 2
-    star_x = x0 + width("BELAL", size) + size * 0.45
     top = (H - (size * 1.74 + 78)) / 2 - 10
+    star_x = x0 + width("BELAL", size) + size * 0.45
     desk = render(W, H, size, x0, [top + size * 0.84, top + size * 1.74], (star_x, top + size * 0.42, size * 0.3),
-                  (x0 + 6, top + size * 1.74 + 78), 32, (av_x, (H - av_d) // 2, av_d))
-    # mobile: avatar on top, name full width below
+                  (x0 + 6, top + size * 1.74 + 78), 32, (bx, bh))
+    # mobile: name on top, bust rising from the bottom edge, centred
     MW, mx = 740, 44
     msize = 200
     while width("ABOSEADA", msize) > MW - 2 * mx:
         msize -= 2
-    av_d = 440
-    top = 40 + av_d + 30
-    MH = int(top + msize * 1.74 + 110)
+    mbh = 500
+    mtop = 56
+    MH = int(mtop + msize * 1.74 + 64 + 40 + mbh)
     mstar_x = mx + width("BELAL", msize) + msize * 0.45
-    mob = render(MW, MH, msize, mx, [top + msize * 0.84, top + msize * 1.74],
-                 (mstar_x, top + msize * 0.42, msize * 0.3), (mx + 4, top + msize * 1.74 + 64), 27,
-                 ((MW - av_d) // 2, 40, av_d))
+    mob = render(MW, MH, msize, mx, [mtop + msize * 0.84, mtop + msize * 1.74],
+                 (mstar_x, mtop + msize * 0.42, msize * 0.3), (mx + 4, mtop + msize * 1.74 + 64), 27,
+                 ((MW - round(mbh * BUST_RATIO)) // 2, mbh))
     for name, svg in [("hero.svg", desk), ("hero-mobile.svg", mob)]:
         with open(os.path.join(ROOT, name), "w", encoding="utf-8") as f:
             f.write(svg)
