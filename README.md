@@ -1,5 +1,14 @@
 <div align="center">
 
+<img src="./assets/avatar.png" width="150" alt="Belal Aboseada, illustrated avatar" />
+
+<h3><code>belal@github ~ $ echo "Hi, I'm Belal Aboseada"</code></h3>
+
+<sub>Software Engineer · Tech Content Creator · Damanhur, Egypt</sub>
+
+<br>
+<br>
+
 <!-- live contribution graph: real data, cells cascade in once and hold.
      regenerated daily by .github/workflows/update-profile-art.yml -->
 
