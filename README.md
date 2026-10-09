@@ -4,8 +4,8 @@
 
 <a href="https://belalaboseada.vercel.app/">
 <picture>
-  <source media="(max-width: 767px)" srcset="./hero-mobile.svg">
-  <img src="./hero.svg" width="860" alt="Belal Aboseada: Software Engineer and Tech Content Creator" />
+  <source media="(max-width: 767px)" srcset="./hero-mobile.svg?v=1883525e">
+  <img src="./hero.svg?v=b0260838" width="860" alt="Belal Aboseada: Software Engineer and Tech Content Creator" />
 </picture>
 </a>
 
@@ -27,11 +27,11 @@
 <!-- portrait (avatar types itself in as ascii, then fades to the image) + about card.
      desktop: side by side (whoami.svg). phones: stacked, bigger type (whoami-mobile.svg).
      rebuild: python scripts/fonts.py (once) && python scripts/make_avatar_svg.py && python scripts/make_info_card.py
-              && python scripts/make_whoami_svg.py -->
+              && python scripts/make_whoami_svg.py && python scripts/stamp_readme.py -->
 
 <picture>
-  <source media="(max-width: 767px)" srcset="./whoami-mobile.svg">
-  <img src="./whoami.svg" width="860" alt="Belal Aboseada: Software Engineer and Tech Content Creator from Damanhur, Egypt" />
+  <source media="(max-width: 767px)" srcset="./whoami-mobile.svg?v=9160063b">
+  <img src="./whoami.svg?v=848e3e32" width="860" alt="Belal Aboseada: Software Engineer and Tech Content Creator from Damanhur, Egypt" />
 </picture>
 
 <br>
@@ -51,8 +51,8 @@
 
 <a href="mailto:belalaboseada@gmail.com">
 <picture>
-  <source media="(max-width: 767px)" srcset="./footer-mobile.svg">
-  <img src="./footer.svg" width="860" alt="Let's work together: belalaboseada@gmail.com" />
+  <source media="(max-width: 767px)" srcset="./footer-mobile.svg?v=54a14e73">
+  <img src="./footer.svg?v=76d7a5f7" width="860" alt="Let's work together: belalaboseada@gmail.com" />
 </picture>
 </a>
 

@@ -69,12 +69,15 @@ def render(w, h, size, x0, line_y, star, sub_xy, sub_fs, av):
 if __name__ == "__main__":
     # desktop: name left, avatar right
     W, H, x0 = 1720, 620, 70
+    av_d = 500
+    av_x = W - 70 - av_d
     size = 210
-    while width("ABOSEADA", size) > 1120:
+    while width("ABOSEADA", size) > av_x - x0 - 70:   # keep a clear gap before the avatar
         size -= 2
     star_x = x0 + width("BELAL", size) + size * 0.45
-    desk = render(W, H, size, x0, [70 + size * 0.84, 70 + size * 1.74], (star_x, 70 + size * 0.42, size * 0.3),
-                  (x0 + 6, 70 + size * 1.74 + 78), 32, (W - 70 - 500, (H - 500) // 2, 500))
+    top = (H - (size * 1.74 + 78)) / 2 - 10
+    desk = render(W, H, size, x0, [top + size * 0.84, top + size * 1.74], (star_x, top + size * 0.42, size * 0.3),
+                  (x0 + 6, top + size * 1.74 + 78), 32, (av_x, (H - av_d) // 2, av_d))
     # mobile: avatar on top, name full width below
     MW, mx = 740, 44
     msize = 200
