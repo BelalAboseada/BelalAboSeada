@@ -10,6 +10,7 @@ import os
 
 from PIL import Image
 
+from fonts import BODY
 from theme import ACCENT, FLAX, INK, MUTED, TITLEBAR_H, frame, svg_open
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -58,7 +59,7 @@ def data_uri():
 def render():
     im = load()
     dur = TYPE_S / ROWS
-    out = [svg_open(W, H), frame(W, H, "belal@github: ~$ ./portrait.sh", pad=28, scale=2, uid="pbg")]
+    out = [svg_open(W, H), frame(W, H, "Portrait", num="02", pad=28, scale=2, uid="pbg")]
     out.append(f'<g><animate attributeName="opacity" from="1" to="0" begin="{FADE_AT}s" dur="{FADE_S}s" fill="freeze"/>')
     for i, line in enumerate(ascii_rows(im)):
         if not line.strip():
@@ -76,7 +77,7 @@ def render():
                f'<image href="{data_uri()}" x="{X0}" y="{Y0}" width="{D}" height="{D}"/></g>')
     sy = H - 18
     out.append(f'<line x1="0" y1="{H - STATUS_H}" x2="{W}" y2="{H - STATUS_H}" stroke="{FLAX[700]}" stroke-opacity="0.7"/>')
-    out.append(f'<text x="28" y="{sy}" font-size="22" fill="{MUTED}">avatar.png · '
+    out.append(f'<text x="28" y="{sy}" font-family="{BODY}" font-size="22" fill="{MUTED}">avatar.png · '
                f'<tspan fill="{ACCENT}">Belal Aboseada</tspan> · Damanhur, EG</text>')
     out.append(f'<rect x="{W - 41}" y="{sy - 18}" width="13" height="22" fill="{ACCENT}">'
                f'<animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.5;0.5;1" dur="1.1s" '

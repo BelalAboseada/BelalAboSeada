@@ -9,6 +9,7 @@ import datetime
 import json
 import os
 
+from fonts import BODY, TITLE
 from theme import ACCENT, FLAX, FRAME, MUTED, TEXT, TITLEBAR_H, frame, svg_open
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -50,7 +51,7 @@ def render(data, mobile=False):
     css = ("@keyframes pop{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}"
            ".c{opacity:0;animation:pop .45s cubic-bezier(.2,.8,.2,1) both}")
     out = [svg_open(w, h), f"<style>{css}</style>",
-           frame(w, h, "~/contributions --graph" if mobile else "belal@github: ~/contributions --graph")]
+           frame(w, h, "Activity", num="01"), f'<g font-family="{BODY}">']
 
     seen = set()
     for ci, col in enumerate(cols):
@@ -88,11 +89,11 @@ def render(data, mobile=False):
     if data["current_streak"]:
         stats.insert(0, ("current streak", f'{data["current_streak"]}d'))
     spans = f'<tspan fill="{MUTED}">  &#183;  </tspan>'.join(
-        f'<tspan fill="{MUTED}">{k} </tspan><tspan fill="{ACCENT}" font-weight="700">{v}</tspan>'
+        f'<tspan fill="{MUTED}">{k} </tspan><tspan fill="{ACCENT}" font-family="{TITLE}">{v}</tspan>'
         for k, v in (stats[:2] if mobile else stats))
-    total = (f'<tspan font-weight="700">{data["total_contributions"]:,}</tspan>'
-             f'<tspan fill="{MUTED}"> public contributions in the last year</tspan>')
-    best_s = (f'best day <tspan fill="{FLAX[50]}" font-weight="700">{best["count"]}</tspan> on {best["date"]}')
+    total = (f'<tspan font-family="{TITLE}">{data["total_contributions"]:,}</tspan>'
+             f'<tspan fill="{MUTED}"> contributions in the last year</tspan>')
+    best_s = (f'best day <tspan fill="{FLAX[50]}" font-family="{TITLE}">{best["count"]}</tspan> on {best["date"]}')
     rng_s = f'{rng["start"]} &#8594; {rng["end"]}'
     if mobile:
         lines = [(total, TEXT), (spans, None), (best_s, MUTED), (rng_s, MUTED)]
@@ -105,7 +106,7 @@ def render(data, mobile=False):
         out.append(f'<text x="{w - PAD}" y="{y1}" font-size="12" fill="{MUTED}" text-anchor="end">{rng_s}</text>')
         out.append(f'<text x="{PAD}" y="{y2}" font-size="{fs}">{spans}</text>')
         out.append(f'<text x="{w - PAD}" y="{y2}" font-size="12" fill="{MUTED}" text-anchor="end">{best_s}</text>')
-    out.append("</svg>")
+    out.append("</g></svg>")
     return "".join(out)
 
 

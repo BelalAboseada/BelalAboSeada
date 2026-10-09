@@ -1,88 +1,87 @@
 #!/usr/bin/env python3
-"""Hand-authored neofetch-style info card. Rows fade/slide in on a stagger,
-then a cursor blinks. STATIC=1 renders the final frame only.
+"""About card in the portfolio's services-list style: big Cabinet Grotesk
+name, olive subtitle, then numbered rows (01 · LABEL · value) split by
+hairlines. Rows fade/slide in on a stagger. STATIC=1 renders the final frame.
 
-Two layouts: the desktop card (980 wide, sits next to the portrait) and a
-mobile card (740 wide, bigger type, shorter lines) for the stacked phone view.
-Edit ROWS / MOBILE_ROWS when your story changes -- live stats live in the heatmap."""
+Two layouts: desktop (980 wide, sits next to the portrait) and mobile (740
+wide, shorter values) for the stacked phone view."""
 import html
 import os
 
-from theme import ACCENT, FLAX, FRAME, MUTED, TEXT, frame, svg_open
+from fonts import BODY, TITLE, TITLE_MID
+from theme import ACCENT, FLAX, MUTED, TEXT, TITLEBAR_H, frame, svg_open
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 STATIC = os.environ.get("STATIC") == "1"
 
-USER = "belal@aboseada"
+NAME = "BELAL ABOSEADA"
+SUB = "Software Engineer × Tech Content Creator"
 MOTTO = "Developer by day, creator by night."
 ROWS = [
-    ("Role", "Software Engineer · Tech Content Creator"),
-    ("Host", "Damanhur, Egypt"),
     ("Now", "Shipping a SaaS + freelance web apps"),
     ("Prev", "Madar · MockMate AI coach · Pyutube CLI"),
     ("Front", "TypeScript · Next.js · React · Vue · Tailwind"),
     ("Motion", "GSAP · Lenis · scroll-driven 3D pages"),
     ("Back", "Node.js · Laravel · Supabase · Firebase"),
     ("Content", "Arabic tech videos: gadgets, AI, everyday"),
-    ("Uptime", "on GitHub since 2023"),
+    ("Base", "Damanhur, Egypt"),
     ("Web", "belalaboseada.vercel.app"),
     ("Mail", "belalaboseada@gmail.com"),
 ]
 MOBILE_ROWS = [
-    ("Role", "Software Engineer"),
-    ("Also", "Tech Content Creator"),
-    ("Host", "Damanhur, Egypt"),
     ("Now", "SaaS + freelance web apps"),
     ("Front", "TS · Next.js · React · Vue"),
     ("Back", "Node · Laravel · Supabase"),
     ("Content", "Arabic tech videos"),
+    ("Base", "Damanhur, Egypt"),
     ("Web", "belalaboseada.vercel.app"),
     ("Mail", "belalaboseada@gmail.com"),
 ]
-# desktop: same height as the portrait panel; mobile height follows its rows
-DESKTOP = dict(w=980, h=880, pad=36, fs=22, lh=48, key_w=160, rows=ROWS)
-MOBILE = dict(w=740, h=None, pad=34, fs=28, lh=56, key_w=170, rows=MOBILE_ROWS)
+DESKTOP = dict(w=980, h=880, rows=ROWS, val_x=230)
+MOBILE = dict(w=740, h=None, rows=MOBILE_ROWS, val_x=210)
+PAD, RH = 36, 52
 
 
 def render(cfg):
-    w, pad, fs, lh, key_w, rows = cfg["w"], cfg["pad"], cfg["fs"], cfg["lh"], cfg["key_w"], cfg["rows"]
-    h = cfg["h"] or (60 + 58 + 22 + lh * len(rows) + 6 + 34 + 26 + 150)
-    css = ("@keyframes in{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:none}}"
-           ".r{opacity:0;animation:in .5s cubic-bezier(.2,.8,.2,1) both}"
-           "@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}"
-           ".cur{animation:blink 1.1s steps(1) infinite}")
+    w, rows, val_x = cfg["w"], cfg["rows"], cfg["val_x"]
+    tb = TITLEBAR_H * 2
+    h = cfg["h"] or (tb + 186 + RH * len(rows) + 150)
+    css = ("@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}"
+           ".r{opacity:0;animation:in .6s cubic-bezier(.2,.8,.2,1) both}")
 
     def anim(i):
-        return "" if STATIC else f' class="r" style="animation-delay:{0.35 + i * 0.16:.2f}s"'
+        return "" if STATIC else f' class="r" style="animation-delay:{0.3 + i * 0.12:.2f}s"'
 
-    out = [svg_open(w, h), f"<style>{css}</style>",
-           frame(w, h, "belal@github: ~$ neofetch", pad=28, scale=2, uid="cbg")]
-    y = 60 + 58
-    out.append(f'<g{anim(0)}><text x="{pad}" y="{y}" font-size="{fs + 5}" font-weight="700" '
-               f'fill="{FLAX[50]}">{USER}</text></g>')
-    y += 22
-    out.append(f'<g{anim(1)}><text x="{pad}" y="{y}" font-size="{fs}" fill="{FRAME}">{"-" * len(USER)}</text></g>')
-    y += lh - 4
+    out = [svg_open(w, h), f"<style>{css}</style>", frame(w, h, "About", num="03", pad=28, scale=2, uid="cbg")]
+    y = tb + 80
+    out.append(f'<g{anim(0)}><text x="{PAD}" y="{y}" font-family="{TITLE}" font-size="56" fill="{FLAX[50]}" '
+               f'letter-spacing="1">{NAME}</text></g>')
+    y += 42
+    out.append(f'<g{anim(1)}><text x="{PAD}" y="{y}" font-family="{BODY}" font-size="23" fill="{ACCENT}">'
+               f'{html.escape(SUB)}</text></g>')
+    y += 28
+    out.append(f'<line x1="{PAD}" y1="{y}" x2="{w - PAD}" y2="{y}" stroke="{FLAX[700]}" stroke-width="1.5"/>')
     i = 1
     for i, (k, v) in enumerate(rows, start=2):
-        out.append(f'<g{anim(i)}><text x="{pad}" y="{y}" font-size="{fs}">'
-                   f'<tspan fill="{ACCENT}" font-weight="700">{k}</tspan><tspan fill="{MUTED}">:</tspan></text>'
-                   f'<text x="{pad + key_w}" y="{y}" font-size="{fs}" fill="{TEXT}">{html.escape(v)}</text></g>')
-        y += lh
-    y += 6
-    out.append(f'<g{anim(i + 1)}><text x="{pad}" y="{y}" font-size="{fs}" font-style="italic" '
+        base = y + RH - 18
+        out.append(
+            f'<g{anim(i)}>'
+            f'<text x="{PAD}" y="{base}" font-family="{BODY}" font-size="16" fill="{FLAX[600]}">{i - 1:02d}</text>'
+            f'<text x="{PAD + 44}" y="{base}" font-family="{BODY}" font-size="17" fill="{MUTED}" '
+            f'letter-spacing="2">{k.upper()}</text>'
+            f'<text x="{PAD + val_x - 36}" y="{base}" font-family="{TITLE_MID}" font-size="26" fill="{TEXT}">'
+            f'{html.escape(v)}</text>'
+            f'<line x1="{PAD}" y1="{y + RH}" x2="{w - PAD}" y2="{y + RH}" stroke="{FLAX[800]}" stroke-width="1.5"/>'
+            f'</g>')
+        y += RH
+    y += 54
+    out.append(f'<g{anim(i + 1)}><text x="{PAD}" y="{y}" font-family="{BODY}" font-size="22" font-style="italic" '
                f'fill="{FLAX[300]}">&#8220;{html.escape(MOTTO)}&#8221;</text></g>')
-    y += 34
-    sw = (w - 2 * pad) / 12
-    swatches = "".join(f'<rect x="{pad + j * sw:.1f}" y="{y}" width="{sw:.1f}" height="26" fill="{FLAX[s]}"/>'
-                       for j, s in enumerate([950, 800, 700, 600, 500, 400, 300, 200, 100, 50]))
+    y += 30
+    sw = (w - 2 * PAD) / 9
+    swatches = "".join(f'<rect x="{PAD + j * sw:.1f}" y="{y}" width="{sw + 0.5:.1f}" height="14" fill="{FLAX[s]}"/>'
+                       for j, s in enumerate([800, 700, 600, 500, 400, 300, 200, 100, 50]))
     out.append(f'<g{anim(i + 2)}>{swatches}</g>')
-    py = h - 40
-    out.append(f'<text x="{pad}" y="{py}" font-size="{fs}" fill="{MUTED}"><tspan fill="{ACCENT}">'
-               f'belal@github</tspan> ~ $ </text>')
-    cls = "" if STATIC else ' class="cur"'
-    out.append(f'<rect{cls} x="{pad + 17 * fs * 0.6:.1f}" y="{py - fs + 3}" width="{fs * 0.6:.1f}" '
-               f'height="{fs}" fill="{ACCENT}"/>')
     out.append("</svg>")
     return "".join(out)
 
