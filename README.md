@@ -1,33 +1,69 @@
 <div align="center">
-  <img src="https://user-images.githubusercontent.com/74038190/212748842-9fcbad5b-6173-4175-8a61-521f3dbb7514.gif" alt="MasterHead" width="100%">
+
+<!-- live contribution graph: real data, cells cascade in once and hold.
+     regenerated daily by .github/workflows/update-profile-art.yml -->
+
+<h3><code>belal@github ~ $ ./contributions.sh</code></h3>
+
+<img src="./contrib-heatmap.svg" width="860" alt="Belal's GitHub contribution graph, auto-refreshed daily" />
+
+<br>
+<br>
+
+<!-- ascii portrait (left) + neofetch card (right). 740x880 and 980x880 svgs,
+     so widths 370 + 490 = 860 give equal heights and line up with the graph.
+     portrait: python scripts/prep_photo.py <photo> && python scripts/make_ascii_svg.py
+     card:     edit ROWS in scripts/make_info_card.py, then run it -->
+
+<h3><code>belal@github ~ $ whoami</code></h3>
+
+<table>
+<tr>
+<td valign="top"><img src="./portrait-ascii.svg" width="370" alt="Belal Aboseada, ASCII portrait" /></td>
+<td valign="top"><img src="./info-card.svg" width="490" alt="Belal Aboseada: Software Engineer and Tech Content Creator from Damanhur, Egypt" /></td>
+</tr>
+</table>
+
+<br>
+<br>
+
+<h3><code>belal@github ~ $ ls ./projects</code></h3>
+
+<table>
+<tr>
+<td><a href="https://mock--mate.vercel.app"><b>MockMate</b></a><br><sub>AI interview coach · SalamHack</sub></td>
+<td><a href="https://madar.services/"><b>Madar</b></a><br><sub>Vue · Tailwind · GSAP</sub></td>
+<td><a href="https://yum-dash.web.app/"><b>Yum-Dash</b></a><br><sub>Food delivery e-commerce</sub></td>
+</tr>
+<tr>
+<td><a href="https://movix-tau-three.vercel.app"><b>Movix</b></a><br><sub>Movies &amp; TV discovery · React</sub></td>
+<td><a href="https://github.com/BelalAboseada/NodeJs-Courses-Project"><b>Courses API</b></a><br><sub>Node.js backend for a courses app</sub></td>
+<td><a href="https://github.com/BelalAboseada/Belal-Portfolio"><b>Portfolio</b></a><br><sub>Next.js · TypeScript · GSAP</sub></td>
+</tr>
+</table>
+
+<br>
+<br>
+
+<h3><code>belal@github ~ $ ./links.sh</code></h3>
+
+<p><b>Software Engineer · Tech Content Creator</b><br><sub>Developer by day, creator by night.</sub></p>
+
+[![Portfolio](https://img.shields.io/badge/Portfolio-belalaboseada.online-1C1D16?style=for-the-badge&logo=vercel&logoColor=F4F4F1)](https://belalaboseada.online/)
+[![Email](https://img.shields.io/badge/Email-belalaboseada@gmail.com-404133?style=for-the-badge&logo=gmail&logoColor=F4F4F1)](mailto:belalaboseada@gmail.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-belal--hesham-62644C?style=for-the-badge&logo=linkedin&logoColor=F4F4F1)](https://www.linkedin.com/in/belal-hesham)
+[![CV](https://img.shields.io/badge/CV-View-838566?style=for-the-badge&logo=googledrive&logoColor=F4F4F1)](https://drive.google.com/file/d/1Ot_5t6ed1R2TANS3rw6u6mf6C7ct8OCl/view?usp=sharing)
+
+[![YouTube](https://img.shields.io/badge/YouTube-@belalaboseada-1C1D16?style=for-the-badge&logo=youtube&logoColor=F4F4F1)](https://www.youtube.com/@belalaboseada)
+[![TikTok](https://img.shields.io/badge/TikTok-@belalaboseada-404133?style=for-the-badge&logo=tiktok&logoColor=F4F4F1)](https://www.tiktok.com/@Belalaboseada)
+[![Instagram](https://img.shields.io/badge/Instagram-belal__aboseada-62644C?style=for-the-badge&logo=instagram&logoColor=F4F4F1)](https://www.instagram.com/belal_aboseada)
+[![Facebook](https://img.shields.io/badge/Facebook-Belal_Hesham-838566?style=for-the-badge&logo=facebook&logoColor=F4F4F1)](https://www.facebook.com/belal.hesham.1848)
+
+<br>
+
+<a href="https://www.buymeacoffee.com/BelalHesham"><img src="https://img.shields.io/badge/Buy_me_a_coffee-BelalHesham-B6B79F?style=for-the-badge&logo=buymeacoffee&logoColor=1C1D16&labelColor=D2D3C3" alt="Buy me a coffee" /></a>
+<img src="https://komarev.com/ghpvc/?username=belalaboseada&label=profile%20views&color=838566&style=for-the-badge" alt="profile views" />
+
+<br>
+
 </div>
-
-<h1 align="center">Hi 👋, I'm Belal Hesham</h1>
-<h3 align="center">A passionate frontend developer from Egypt</h3>
-<img align="right" width="25%" alt="Coding" src="https://i.pinimg.com/originals/f1/e7/34/f1e734f9cade86fe737a9aa404ad5677.gif"/>
-
-<p align="left"> <img src="https://komarev.com/ghpvc/?username=belalaboseada&label=Profile%20views&color=00A9FF&style=flat" alt="belalaboseada" /> </p>
-
-- 🔭 I’m currently working on **Freelancing**
-
-- 🌱 I’m currently learning **Mearn stack**
-
-- 👨‍💻 All of my projects are available at [My Portfolio](https://belalaboseada.online/)
-
-- 📫 How to reach me **belalaboseada@gmail.com**
-
-- 📄 Know about my experiences [My Cv](https://drive.google.com/file/d/1Ot_5t6ed1R2TANS3rw6u6mf6C7ct8OCl/view?usp=sharing)
-
-<h3 align="left">Connect with me:</h3>
-<p align="left">
-<a href="https://linkedin.com/in/https://www.linkedin.com/in/belal-hesham" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="https://www.linkedin.com/in/belal-hesham" height="30" width="40" /></a>
-<a href="https://fb.com/https://www.facebook.com/belal.hesham.1848?mibextid=2jq9oc" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/facebook.svg" alt="https://www.facebook.com/belal.hesham.1848?mibextid=2jq9oc" height="30" width="40" /></a>
-<a href="https://instagram.com/https://www.instagram.com/belalhesham53" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="https://www.instagram.com/belalhesham53" height="30" width="40" /></a>
-</p>
-
-<h3 align="left">Languages and Tools:</h3>
-<p align="left"> <a href="https://getbootstrap.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bootstrap/bootstrap-plain-wordmark.svg" alt="bootstrap" width="40" height="40"/> </a> <a href="https://www.w3schools.com/css/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="css3" width="40" height="40"/> </a> <a href="https://www.figma.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/figma/figma-icon.svg" alt="figma" width="40" height="40"/> </a> <a href="https://firebase.google.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg" alt="firebase" width="40" height="40"/> </a> <a href="https://git-scm.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="40" height="40"/> </a> <a href="https://www.w3.org/html/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> </a> <a href="https://reactjs.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="40" height="40"/> </a> <a href="https://redux.js.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg" alt="redux" width="40" height="40"/> </a> <a href="https://sass-lang.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/sass/sass-original.svg" alt="sass" width="40" height="40"/> </a> </p>
-
-<h3 align="left">Support:</h3>
-<p><a href="https://www.buymeacoffee.com/BelalHesham"> <img align="left" src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="50" width="210" alt="Belal Hesham" /></a></p><br><br>
-
