@@ -19,19 +19,20 @@ FONT = "ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, Consolas, monospa
 TITLEBAR_H = 30
 
 
-def frame(w, h, title, pad=20, scale=1):
+def frame(w, h, title, pad=20, scale=1, uid="bg"):
     """Window chrome: gradient body, hairline border, three dots, centered title.
-    scale=2 for SVGs the README shows at half size, so the chrome matches."""
+    scale=2 for SVGs the README shows at half size, so the chrome matches.
+    uid keeps the gradient id unique when panels are nested in one SVG."""
     tb = TITLEBAR_H * scale
     dots = "".join(
         f'<circle cx="{pad + i * 16 * scale}" cy="{tb / 2}" r="{5 * scale}" fill="{c}"/>'
         for i, c in enumerate([FLAX[300], FLAX[500], FLAX[700]])
     )
     return (
-        f'<defs><linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">'
+        f'<defs><linearGradient id="{uid}" x1="0" y1="0" x2="0" y2="1">'
         f'<stop offset="0" stop-color="{BG2}"/><stop offset="1" stop-color="{BG}"/>'
         f'</linearGradient></defs>'
-        f'<rect width="{w}" height="{h}" rx="{12 * scale}" fill="url(#bg)"/>'
+        f'<rect width="{w}" height="{h}" rx="{12 * scale}" fill="url(#{uid})"/>'
         f'<rect x="0.5" y="0.5" width="{w - 1}" height="{h - 1}" rx="{12 * scale}" fill="none" '
         f'stroke="{FRAME}" stroke-width="1"/>'
         f'<line x1="0" y1="{tb}" x2="{w}" y2="{tb}" stroke="{FRAME}" stroke-opacity="0.7"/>'

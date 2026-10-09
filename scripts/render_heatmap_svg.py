@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 """Render data/contributions.json as a 53x7 contribution heatmap SVG in the
 Flax Smoke palette: rounded cells that cascade in diagonally once and freeze,
-a Less->More legend, and a stats footer."""
+a Less->More legend, and a stats footer.
+
+Writes contrib-heatmap.svg (full year) and contrib-heatmap-mobile.svg (last
+MOBILE_WEEKS weeks, stats stacked) so the graph stays legible on a phone."""
 import datetime
 import json
 import os
@@ -10,13 +13,14 @@ from theme import ACCENT, FLAX, FRAME, MUTED, TEXT, TITLEBAR_H, frame, svg_open
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 IN = os.path.join(HERE, "..", "data", "contributions.json")
-OUT = os.path.join(HERE, "..", "contrib-heatmap.svg")
+ROOT = os.path.join(HERE, "..")
 
 # GitHub's own data-level (0-4, quartiles of *your* activity) -> flax ramp
 PALETTE = ["#2B2C23", FLAX[700], FLAX[500], FLAX[300], FLAX[50]]
 CELL, GAP = 12, 3
 STEP = CELL + GAP
-PAD, LABEL_W, MONTH_H, FOOT_H = 22, 30, 22, 96
+PAD, LABEL_W, MONTH_H = 22, 30, 22
+MOBILE_WEEKS = 22
 
 
 def columns(days):
@@ -33,16 +37,20 @@ def columns(days):
     return cols
 
 
-def render(data):
+def render(data, mobile=False):
     cols = columns(data["days"])
+    if mobile:
+        cols = cols[-MOBILE_WEEKS:]
+    fs = 15 if mobile else 13
+    foot_h = 160 if mobile else 96
     w = PAD + LABEL_W + len(cols) * STEP + PAD
     top = TITLEBAR_H + MONTH_H
-    h = top + 7 * STEP + FOOT_H
+    h = top + 7 * STEP + foot_h
     left = PAD + LABEL_W
     css = ("@keyframes pop{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}"
            ".c{opacity:0;animation:pop .45s cubic-bezier(.2,.8,.2,1) both}")
     out = [svg_open(w, h), f"<style>{css}</style>",
-           frame(w, h, "belal@github: ~/contributions --graph")]
+           frame(w, h, "~/contributions --graph" if mobile else "belal@github: ~/contributions --graph")]
 
     seen = set()
     for ci, col in enumerate(cols):
@@ -76,28 +84,36 @@ def render(data):
     sep = ly + CELL + 14
     out.append(f'<line x1="0" y1="{sep}" x2="{w}" y2="{sep}" stroke="{FRAME}" stroke-opacity="0.6"/>')
     best, rng = data["best_day"], data["range"]
-    y1, y2 = sep + 26, sep + 50
-    out.append(f'<text x="{PAD}" y="{y1}" font-size="13" fill="{TEXT}"><tspan font-weight="700">'
-               f'{data["total_contributions"]:,}</tspan><tspan fill="{MUTED}"> public contributions in the last year'
-               f'</tspan></text>')
-    out.append(f'<text x="{w - PAD}" y="{y1}" font-size="12" fill="{MUTED}" text-anchor="end">'
-               f'{rng["start"]} &#8594; {rng["end"]}</text>')
     stats = [("active days", data["active_days"]), ("longest streak", f'{data["longest_streak"]}d')]
     if data["current_streak"]:
         stats.insert(0, ("current streak", f'{data["current_streak"]}d'))
     spans = f'<tspan fill="{MUTED}">  &#183;  </tspan>'.join(
         f'<tspan fill="{MUTED}">{k} </tspan><tspan fill="{ACCENT}" font-weight="700">{v}</tspan>'
-        for k, v in stats)
-    out.append(f'<text x="{PAD}" y="{y2}" font-size="13">{spans}</text>')
-    out.append(f'<text x="{w - PAD}" y="{y2}" font-size="12" fill="{MUTED}" text-anchor="end">best day '
-               f'<tspan fill="{FLAX[50]}" font-weight="700">{best["count"]}</tspan> on {best["date"]}</text>')
+        for k, v in (stats[:2] if mobile else stats))
+    total = (f'<tspan font-weight="700">{data["total_contributions"]:,}</tspan>'
+             f'<tspan fill="{MUTED}"> public contributions in the last year</tspan>')
+    best_s = (f'best day <tspan fill="{FLAX[50]}" font-weight="700">{best["count"]}</tspan> on {best["date"]}')
+    rng_s = f'{rng["start"]} &#8594; {rng["end"]}'
+    if mobile:
+        lines = [(total, TEXT), (spans, None), (best_s, MUTED), (rng_s, MUTED)]
+        for k, (body, fill) in enumerate(lines):
+            f_attr = f' fill="{fill}"' if fill else ""
+            out.append(f'<text x="{PAD}" y="{sep + 28 + k * 28}" font-size="{fs}"{f_attr}>{body}</text>')
+    else:
+        y1, y2 = sep + 26, sep + 50
+        out.append(f'<text x="{PAD}" y="{y1}" font-size="{fs}" fill="{TEXT}">{total}</text>')
+        out.append(f'<text x="{w - PAD}" y="{y1}" font-size="12" fill="{MUTED}" text-anchor="end">{rng_s}</text>')
+        out.append(f'<text x="{PAD}" y="{y2}" font-size="{fs}">{spans}</text>')
+        out.append(f'<text x="{w - PAD}" y="{y2}" font-size="12" fill="{MUTED}" text-anchor="end">{best_s}</text>')
     out.append("</svg>")
     return "".join(out)
 
 
 if __name__ == "__main__":
     with open(IN, encoding="utf-8") as f:
-        svg = render(json.load(f))
-    with open(OUT, "w", encoding="utf-8") as f:
-        f.write(svg)
-    print(f"wrote contrib-heatmap.svg ({len(svg):,} bytes)")
+        data = json.load(f)
+    for name, mobile in [("contrib-heatmap.svg", False), ("contrib-heatmap-mobile.svg", True)]:
+        svg = render(data, mobile)
+        with open(os.path.join(ROOT, name), "w", encoding="utf-8") as f:
+            f.write(svg)
+        print(f"wrote {name} ({len(svg):,} bytes)")

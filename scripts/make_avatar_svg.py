@@ -48,33 +48,32 @@ def ascii_rows(im):
         yield line
 
 
-def data_uri(im):
+def data_uri():
+    # WebP keeps the transparent sticker edge (hair breaks out of the disc) at a fraction of PNG size
     buf = io.BytesIO()
-    im.resize((D, D), Image.LANCZOS).save(buf, "JPEG", quality=88, optimize=True)
-    return "data:image/jpeg;base64," + base64.b64encode(buf.getvalue()).decode()
+    Image.open(SRC).convert("RGBA").resize((D, D), Image.LANCZOS).save(buf, "WEBP", quality=90, method=6)
+    return "data:image/webp;base64," + base64.b64encode(buf.getvalue()).decode()
 
 
 def render():
     im = load()
     dur = TYPE_S / ROWS
-    out = [svg_open(W, H), frame(W, H, "belal@github: ~$ ./portrait.sh", pad=28, scale=2)]
+    out = [svg_open(W, H), frame(W, H, "belal@github: ~$ ./portrait.sh", pad=28, scale=2, uid="pbg")]
     out.append(f'<g><animate attributeName="opacity" from="1" to="0" begin="{FADE_AT}s" dur="{FADE_S}s" fill="freeze"/>')
     for i, line in enumerate(ascii_rows(im)):
         if not line.strip():
             continue
         y = Y0 + i * CELL_H
         out.append(
-            f'<clipPath id="r{i}"><rect x="{X0}" y="{y:.2f}" height="{CELL_H + 1:.2f}" width="0">'
+            f'<clipPath id="pr{i}"><rect x="{X0}" y="{y:.2f}" height="{CELL_H + 1:.2f}" width="0">'
             f'<animate attributeName="width" from="0" to="{D}" begin="{i * dur:.3f}s" dur="{dur:.3f}s" fill="freeze"/>'
-            f'</rect></clipPath><text clip-path="url(#r{i})" xml:space="preserve" x="{X0}" '
+            f'</rect></clipPath><text clip-path="url(#pr{i})" xml:space="preserve" x="{X0}" '
             f'y="{y + CELL_H * 0.78:.2f}" fill="{INK}" font-size="{CELL_H * 0.86:.2f}" textLength="{D}" '
             f'lengthAdjust="spacingAndGlyphs">{html.escape(line)}</text>')
     out.append("</g>")
-    cx, cy, r = X0 + D / 2, Y0 + D / 2, D / 2
-    out.append(f'<clipPath id="disc"><circle cx="{cx}" cy="{cy}" r="{r - 2}"/></clipPath>')
     out.append(f'<g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="{FADE_AT}s" '
                f'dur="{FADE_S}s" fill="freeze"/>'
-               f'<image href="{data_uri(im)}" x="{X0}" y="{Y0}" width="{D}" height="{D}" clip-path="url(#disc)"/></g>')
+               f'<image href="{data_uri()}" x="{X0}" y="{Y0}" width="{D}" height="{D}"/></g>')
     sy = H - 18
     out.append(f'<line x1="0" y1="{H - STATUS_H}" x2="{W}" y2="{H - STATUS_H}" stroke="{FLAX[700]}" stroke-opacity="0.7"/>')
     out.append(f'<text x="28" y="{sy}" font-size="22" fill="{MUTED}">avatar.png · '

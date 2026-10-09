@@ -1,19 +1,20 @@
 #!/usr/bin/env python3
-"""Hand-authored neofetch-style info card (info-card.svg). Rows fade/slide in
-on a stagger, then a cursor blinks. STATIC=1 renders the final frame only.
-Edit ROWS below when your story changes -- live stats live in the heatmap."""
+"""Hand-authored neofetch-style info card. Rows fade/slide in on a stagger,
+then a cursor blinks. STATIC=1 renders the final frame only.
+
+Two layouts: the desktop card (980 wide, sits next to the portrait) and a
+mobile card (740 wide, bigger type, shorter lines) for the stacked phone view.
+Edit ROWS / MOBILE_ROWS when your story changes -- live stats live in the heatmap."""
 import html
 import os
 
-from theme import ACCENT, FLAX, FRAME, MUTED, TEXT, TITLEBAR_H, frame, svg_open
+from theme import ACCENT, FLAX, FRAME, MUTED, TEXT, frame, svg_open
 
-OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "info-card.svg")
+HERE = os.path.dirname(os.path.abspath(__file__))
 STATIC = os.environ.get("STATIC") == "1"
-W, H = 980, 880          # same height as portrait-ascii.svg at README widths 490/370
-PAD, FS, LH = 36, 22, 48
-KEY_W = 160
 
 USER = "belal@aboseada"
+MOTTO = "Developer by day, creator by night."
 ROWS = [
     ("Role", "Software Engineer · Tech Content Creator"),
     ("Host", "Damanhur, Egypt"),
@@ -27,54 +28,68 @@ ROWS = [
     ("Web", "belalaboseada.vercel.app"),
     ("Mail", "belalaboseada@gmail.com"),
 ]
-MOTTO = "Developer by day, creator by night."
+MOBILE_ROWS = [
+    ("Role", "Software Engineer"),
+    ("Also", "Tech Content Creator"),
+    ("Host", "Damanhur, Egypt"),
+    ("Now", "SaaS + freelance web apps"),
+    ("Front", "TS · Next.js · React · Vue"),
+    ("Back", "Node · Laravel · Supabase"),
+    ("Content", "Arabic tech videos"),
+    ("Web", "belalaboseada.vercel.app"),
+    ("Mail", "belalaboseada@gmail.com"),
+]
+# desktop: same height as the portrait panel; mobile height follows its rows
+DESKTOP = dict(w=980, h=880, pad=36, fs=22, lh=48, key_w=160, rows=ROWS)
+MOBILE = dict(w=740, h=None, pad=34, fs=28, lh=56, key_w=170, rows=MOBILE_ROWS)
 
 
-def anim(i):
-    return "" if STATIC else f' class="r" style="animation-delay:{0.35 + i * 0.16:.2f}s"'
-
-
-def render():
+def render(cfg):
+    w, pad, fs, lh, key_w, rows = cfg["w"], cfg["pad"], cfg["fs"], cfg["lh"], cfg["key_w"], cfg["rows"]
+    h = cfg["h"] or (60 + 58 + 22 + lh * len(rows) + 6 + 34 + 26 + 150)
     css = ("@keyframes in{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:none}}"
            ".r{opacity:0;animation:in .5s cubic-bezier(.2,.8,.2,1) both}"
            "@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}"
            ".cur{animation:blink 1.1s steps(1) infinite}")
-    out = [svg_open(W, H), f"<style>{css}</style>", frame(W, H, "belal@github: ~$ neofetch", pad=28, scale=2)]
-    y = TITLEBAR_H * 2 + 58
-    out.append(f'<g{anim(0)}><text x="{PAD}" y="{y}" font-size="{FS + 5}" font-weight="700" fill="{FLAX[50]}">'
-               f'{USER}</text></g>')
+
+    def anim(i):
+        return "" if STATIC else f' class="r" style="animation-delay:{0.35 + i * 0.16:.2f}s"'
+
+    out = [svg_open(w, h), f"<style>{css}</style>",
+           frame(w, h, "belal@github: ~$ neofetch", pad=28, scale=2, uid="cbg")]
+    y = 60 + 58
+    out.append(f'<g{anim(0)}><text x="{pad}" y="{y}" font-size="{fs + 5}" font-weight="700" '
+               f'fill="{FLAX[50]}">{USER}</text></g>')
     y += 22
-    out.append(f'<g{anim(1)}><text x="{PAD}" y="{y}" font-size="{FS}" fill="{FRAME}">'
-               f'{"-" * len(USER)}</text></g>')
-    y += LH - 4
-    for i, (k, v) in enumerate(ROWS, start=2):
-        out.append(f'<g{anim(i)}><text x="{PAD}" y="{y}" font-size="{FS}">'
-                   f'<tspan fill="{ACCENT}" font-weight="700">{k}</tspan>'
-                   f'<tspan fill="{MUTED}">:</tspan></text>'
-                   f'<text x="{PAD + KEY_W}" y="{y}" font-size="{FS}" fill="{TEXT}">{html.escape(v)}</text></g>')
-        y += LH
-    i += 1
+    out.append(f'<g{anim(1)}><text x="{pad}" y="{y}" font-size="{fs}" fill="{FRAME}">{"-" * len(USER)}</text></g>')
+    y += lh - 4
+    i = 1
+    for i, (k, v) in enumerate(rows, start=2):
+        out.append(f'<g{anim(i)}><text x="{pad}" y="{y}" font-size="{fs}">'
+                   f'<tspan fill="{ACCENT}" font-weight="700">{k}</tspan><tspan fill="{MUTED}">:</tspan></text>'
+                   f'<text x="{pad + key_w}" y="{y}" font-size="{fs}" fill="{TEXT}">{html.escape(v)}</text></g>')
+        y += lh
     y += 6
-    out.append(f'<g{anim(i)}><text x="{PAD}" y="{y}" font-size="{FS}" font-style="italic" fill="{FLAX[300]}">'
-               f'&#8220;{html.escape(MOTTO)}&#8221;</text></g>')
-    i += 1
+    out.append(f'<g{anim(i + 1)}><text x="{pad}" y="{y}" font-size="{fs}" font-style="italic" '
+               f'fill="{FLAX[300]}">&#8220;{html.escape(MOTTO)}&#8221;</text></g>')
     y += 34
-    sw = 54
-    swatches = "".join(f'<rect x="{PAD + j * sw}" y="{y}" width="{sw}" height="26" fill="{FLAX[s]}"/>'
+    sw = (w - 2 * pad) / 12
+    swatches = "".join(f'<rect x="{pad + j * sw:.1f}" y="{y}" width="{sw:.1f}" height="26" fill="{FLAX[s]}"/>'
                        for j, s in enumerate([950, 800, 700, 600, 500, 400, 300, 200, 100, 50]))
-    out.append(f'<g{anim(i)}>{swatches}</g>')
-    py = H - 40
-    out.append(f'<text x="{PAD}" y="{py}" font-size="{FS}" fill="{MUTED}"><tspan fill="{ACCENT}">belal@github</tspan>'
-               f' ~ $ </text>')
+    out.append(f'<g{anim(i + 2)}>{swatches}</g>')
+    py = h - 40
+    out.append(f'<text x="{pad}" y="{py}" font-size="{fs}" fill="{MUTED}"><tspan fill="{ACCENT}">'
+               f'belal@github</tspan> ~ $ </text>')
     cls = "" if STATIC else ' class="cur"'
-    out.append(f'<rect{cls} x="{PAD + 17 * FS * 0.6:.1f}" y="{py - FS + 3}" width="{FS * 0.6:.1f}" height="{FS}" '
-               f'fill="{ACCENT}"/>')
+    out.append(f'<rect{cls} x="{pad + 17 * fs * 0.6:.1f}" y="{py - fs + 3}" width="{fs * 0.6:.1f}" '
+               f'height="{fs}" fill="{ACCENT}"/>')
     out.append("</svg>")
     return "".join(out)
 
 
 if __name__ == "__main__":
-    svg = render()
-    with open(OUT, "w", encoding="utf-8") as f:
-        f.write(svg)
-    print(f"wrote info-card.svg ({len(svg):,} bytes)")
+    for name, cfg in [("info-card.svg", DESKTOP), ("info-card-mobile.svg", MOBILE)]:
+        svg = render(cfg)
+        with open(os.path.join(HERE, "..", name), "w", encoding="utf-8") as f:
+            f.write(svg)
+        print(f"wrote {name} ({len(svg):,} bytes)")
