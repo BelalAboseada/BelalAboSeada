@@ -1,6 +1,5 @@
 <div align="center">
 
-<h3><code>belal@github ~ $ echo "Hi, I'm Belal Aboseada"</code></h3>
 
 <sub>Software Engineer · Tech Content Creator · Damanhur, Egypt</sub>
 
@@ -10,7 +9,6 @@
 <!-- live contribution graph: real data, cells cascade in once and hold.
      regenerated daily by .github/workflows/update-profile-art.yml -->
 
-<h3><code>belal@github ~ $ ./contributions.sh</code></h3>
 
 <img src="./contrib-heatmap.svg" width="860" alt="Belal's GitHub contribution graph, auto-refreshed daily" />
 
