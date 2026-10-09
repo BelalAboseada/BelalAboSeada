@@ -65,6 +65,12 @@ def frame(w, h, title, num="01", pad=20, scale=1, uid="bg"):
     )
 
 
+# Reduced-motion viewers get the final frame: every CSS-animated class starts
+# hidden, so switch the animation off and show it as it ends.
+REDUCED = ("@media (prefers-reduced-motion: reduce){.c,.r,.ln,.av,.fd,.u{animation:none!important;"
+           "opacity:1!important;transform:none!important}}")
+
+
 def svg_open(w, h, fonts=("Cabinet", "CabinetMid", "Switzer")):
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" '
-            f'viewBox="0 0 {w} {h}" font-family="{FONT}"><style>{css(*fonts)}</style>')
+            f'viewBox="0 0 {w} {h}" font-family="{FONT}"><style>{css(*fonts)}{REDUCED}</style>')
