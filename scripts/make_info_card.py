@@ -24,7 +24,7 @@ ROWS = [
     ("Back", "Node.js · Laravel · Supabase · Firebase"),
     ("Content", "Arabic tech videos: gadgets, AI, everyday"),
     ("Uptime", "on GitHub since 2023"),
-    ("Web", "belalaboseada.online"),
+    ("Web", "belalaboseada.vercel.app"),
     ("Mail", "belalaboseada@gmail.com"),
 ]
 MOTTO = "Developer by day, creator by night."
