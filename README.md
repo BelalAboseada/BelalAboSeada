@@ -37,15 +37,23 @@
 <br>
 <br>
 
-<!-- links: two narrow columns so the table fits a phone without scrolling -->
+<!-- links: a "( 04 ) Links" header card + one small card per link (each its own link).
+     rebuild: python scripts/make_links_svg.py && python scripts/stamp_readme.py -->
 
-<table>
-<tr><th>( WORK )</th><th>( CREATE )</th></tr>
-<tr><td><a href="https://belalaboseada.vercel.app/"><img src="https://cdn.simpleicons.org/vercel/B6B79F" width="16" height="16" alt="" />&nbsp;<b>Portfolio</b></a></td><td><a href="https://www.youtube.com/@belalaboseada"><img src="https://cdn.simpleicons.org/youtube/B6B79F" width="16" height="16" alt="" />&nbsp;<b>YouTube</b></a></td></tr>
-<tr><td><a href="mailto:belalaboseada@gmail.com"><img src="https://cdn.simpleicons.org/gmail/B6B79F" width="16" height="16" alt="" />&nbsp;<b>Email</b></a></td><td><a href="https://www.tiktok.com/@Belalaboseada"><img src="https://cdn.simpleicons.org/tiktok/B6B79F" width="16" height="16" alt="" />&nbsp;<b>TikTok</b></a></td></tr>
-<tr><td><a href="https://www.linkedin.com/in/belal-hesham"><img src="./assets/linkedin.svg" width="16" height="16" alt="" />&nbsp;<b>LinkedIn</b></a></td><td><a href="https://www.instagram.com/belal_aboseada"><img src="https://cdn.simpleicons.org/instagram/B6B79F" width="16" height="16" alt="" />&nbsp;<b>Instagram</b></a></td></tr>
-<tr><td><a href="https://drive.google.com/file/d/1Ot_5t6ed1R2TANS3rw6u6mf6C7ct8OCl/view?usp=sharing"><img src="https://cdn.simpleicons.org/googledrive/B6B79F" width="16" height="16" alt="" />&nbsp;<b>CV</b></a></td><td><a href="https://www.facebook.com/belal.hesham.1848"><img src="https://cdn.simpleicons.org/facebook/B6B79F" width="16" height="16" alt="" />&nbsp;<b>Facebook</b></a></td></tr>
-</table>
+<picture>
+  <source media="(max-width: 767px)" srcset="./links/links-header-mobile.svg?v=521fc7e6">
+  <img src="./links/links-header.svg?v=931d4a8b" width="860" alt="Links" />
+</picture>
+
+<a href="https://belalaboseada.vercel.app/"><picture><source media="(max-width: 767px)" srcset="./links/portfolio-m.svg?v=715ce05a"><img src="./links/portfolio.svg?v=e12e526d" width="24%" alt="Portfolio" /></picture></a>
+<a href="mailto:belalaboseada@gmail.com"><picture><source media="(max-width: 767px)" srcset="./links/email-m.svg?v=110417e4"><img src="./links/email.svg?v=b6bbbf43" width="24%" alt="Email" /></picture></a>
+<a href="https://www.linkedin.com/in/belal-hesham"><picture><source media="(max-width: 767px)" srcset="./links/linkedin-m.svg?v=087b6857"><img src="./links/linkedin.svg?v=54f3d8c6" width="24%" alt="LinkedIn" /></picture></a>
+<a href="https://drive.google.com/file/d/1Ot_5t6ed1R2TANS3rw6u6mf6C7ct8OCl/view?usp=sharing"><picture><source media="(max-width: 767px)" srcset="./links/cv-m.svg?v=95a0e2dd"><img src="./links/cv.svg?v=8fb5c86b" width="24%" alt="CV" /></picture></a>
+
+<a href="https://www.youtube.com/@belalaboseada"><picture><source media="(max-width: 767px)" srcset="./links/youtube-m.svg?v=ffbc64e1"><img src="./links/youtube.svg?v=0684457e" width="24%" alt="YouTube" /></picture></a>
+<a href="https://www.tiktok.com/@Belalaboseada"><picture><source media="(max-width: 767px)" srcset="./links/tiktok-m.svg?v=d48fe126"><img src="./links/tiktok.svg?v=8f961043" width="24%" alt="TikTok" /></picture></a>
+<a href="https://www.instagram.com/belal_aboseada"><picture><source media="(max-width: 767px)" srcset="./links/instagram-m.svg?v=6a643a28"><img src="./links/instagram.svg?v=e466e733" width="24%" alt="Instagram" /></picture></a>
+<a href="https://www.facebook.com/belal.hesham.1848"><picture><source media="(max-width: 767px)" srcset="./links/facebook-m.svg?v=54d98cdb"><img src="./links/facebook.svg?v=b4b08ed8" width="24%" alt="Facebook" /></picture></a>
 
 <br>
 

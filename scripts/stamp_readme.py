@@ -24,7 +24,7 @@ if __name__ == "__main__":
     p = os.path.join(ROOT, "README.md")
     with open(p, encoding="utf-8") as f:
         s = f.read()
-    s = re.sub(r'(src|srcset)="\./([\w.-]+\.svg)(?:\?v=\w+)?"', stamp, s)
+    s = re.sub(r'(src|srcset)="\./([\w./-]+\.svg)(?:\?v=\w+)?"', stamp, s)
     with open(p, "w", encoding="utf-8") as f:
         f.write(s)
     print("\n".join(l.strip() for l in s.splitlines() if ".svg" in l and ("src=" in l or "srcset=" in l)))
