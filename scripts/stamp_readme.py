@@ -2,13 +2,13 @@
 """Append ?v=<content hash> to the README's local SVG links (src and srcset)
 so browsers fetch a fresh copy as soon as an image changes. GitHub lets
 browsers cache README images for ~5 minutes otherwise.
-Run after regenerating any SVG; the daily heatmap is left unstamped."""
+Run after regenerating any SVG; the daily workflow runs it too, after the heatmap."""
 import hashlib
 import os
 import re
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
-SKIP = {"contrib-heatmap.svg", "contrib-heatmap-mobile.svg"}
+SKIP = set()
 
 
 def stamp(match):

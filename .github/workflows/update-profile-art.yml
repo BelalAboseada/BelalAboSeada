@@ -32,8 +32,11 @@ jobs:
       - name: Render animated heatmap SVGs (desktop + mobile)
         run: python scripts/render_heatmap_svg.py
 
+      - name: Version-stamp README image links (busts browser caches)
+        run: python scripts/stamp_readme.py
+
       - name: Commit refreshed art
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: refresh contribution graph [skip ci]"
-          file_pattern: "data/contributions.json contrib-heatmap.svg contrib-heatmap-mobile.svg"
+          file_pattern: "data/contributions.json contrib-heatmap.svg contrib-heatmap-mobile.svg README.md"
