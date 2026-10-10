@@ -30,8 +30,8 @@
               && python scripts/make_whoami_svg.py && python scripts/stamp_readme.py -->
 
 <picture>
-  <source media="(max-width: 767px)" srcset="./whoami-mobile.svg?v=9160063b">
-  <img src="./whoami.svg?v=848e3e32" width="860" alt="Belal Aboseada: Software Engineer and Tech Content Creator from Damanhur, Egypt" />
+  <source media="(max-width: 767px)" srcset="./whoami-mobile.svg?v=dcd6a658">
+  <img src="./whoami.svg?v=f1e00eb0" width="860" alt="Belal Aboseada: Software Engineer and Tech Content Creator from Damanhur, Egypt" />
 </picture>
 
 <br>
