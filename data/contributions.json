@@ -1,23 +1,19 @@
 {
  "username": "BelalAboseada",
- "generated_at": "2026-10-31T12:45:44Z",
+ "generated_at": "2026-11-01T13:36:09Z",
  "range": {
-  "start": "2025-10-26",
-  "end": "2026-10-31"
+  "start": "2025-11-02",
+  "end": "2026-11-01"
  },
- "total_contributions": 1196,
- "active_days": 95,
- "current_streak": 23,
- "longest_streak": 23,
+ "total_contributions": 1175,
+ "active_days": 94,
+ "current_streak": 24,
+ "longest_streak": 24,
  "best_day": {
   "date": "2026-09-26",
   "count": 141
  },
  "monthly": [
-  {
-   "month": "2025-10",
-   "total": 34
-  },
   {
    "month": "2025-11",
    "total": 5
@@ -64,45 +60,14 @@
   },
   {
    "month": "2026-10",
-   "total": 583
+   "total": 584
+  },
+  {
+   "month": "2026-11",
+   "total": 12
   }
  ],
  "days": [
-  {
-   "date": "2025-10-26",
-   "count": 0,
-   "level": 0
-  },
-  {
-   "date": "2025-10-27",
-   "count": 2,
-   "level": 1
-  },
-  {
-   "date": "2025-10-28",
-   "count": 32,
-   "level": 2
-  },
-  {
-   "date": "2025-10-29",
-   "count": 0,
-   "level": 0
-  },
-  {
-   "date": "2025-10-30",
-   "count": 0,
-   "level": 0
-  },
-  {
-   "date": "2025-10-31",
-   "count": 0,
-   "level": 0
-  },
-  {
-   "date": "2025-11-01",
-   "count": 0,
-   "level": 0
-  },
   {
    "date": "2025-11-02",
    "count": 3,
@@ -1920,7 +1885,12 @@
   },
   {
    "date": "2026-10-31",
-   "count": 13,
+   "count": 14,
+   "level": 1
+  },
+  {
+   "date": "2026-11-01",
+   "count": 12,
    "level": 1
   }
  ]
