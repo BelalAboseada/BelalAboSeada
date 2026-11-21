@@ -17,8 +17,8 @@
      phones (<= 767px) get the last 22 weeks with stacked stats. -->
 
 <picture>
-  <source media="(max-width: 767px)" srcset="./contrib-heatmap-mobile.svg?v=6b46492a">
-  <img src="./contrib-heatmap.svg?v=6a04c7d2" width="860" alt="Belal's GitHub contribution graph, auto-refreshed daily" />
+  <source media="(max-width: 767px)" srcset="./contrib-heatmap-mobile.svg?v=d3983f02">
+  <img src="./contrib-heatmap.svg?v=9441ce21" width="860" alt="Belal's GitHub contribution graph, auto-refreshed daily" />
 </picture>
 
 <br>
